@@ -1,0 +1,125 @@
+﻿@page "/"
+
+@inject IViewInventoriesByNameUseCase ViewInventoriesByNameUseCase
+@inject IEditInventoryUseCase EditInventoryUseCase
+
+
+<style>
+    /* wwwroot/css/styles.css */
+
+   /* .inventory-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .inventory-item {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .low-quantity {
+        color: red;
+        font-weight: bold;
+    }
+
+    .high-quantity {
+        color: darkblue;
+        font-weight: bold;
+    }*/
+
+    /* Responsive Typography */
+    body {
+        font-size: 16px;
+    }
+
+    /* Gradient Background */
+    .inventory-container {
+        background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+
+    /* Animation */
+    .fade-in {
+        opacity: 0;
+        transition: opacity 1s ease-out;
+    }
+
+        .fade-in.active {
+            opacity: 1;
+        }
+</style>
+
+<!-- ... -->
+@*<div>
+    <span>Inventory Items With Quantity Details</span>
+</div>
+<div></div>
+<ul class="inventory-list">
+    @foreach (var inv in _inventories)
+    {
+        <li class="inventory-item @(inv.Quantity < 5 ? "low-quantity" : "high-quantity")">
+            <span>@inv.InventoryName</span>
+            <span>@inv.Quantity</span>
+        </li>
+    }
+</ul>*@
+
+<div>
+    <div class="row">
+        <div class="col">
+            <h2 class="text-center fade-in active">Inventory Items - Quantity Details</h2>
+            <br/>
+            <div></div>
+            <div>
+                <div class="row">
+                    @foreach (var inv in _inventories)
+                    {
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">@inv.InventoryName</h5>
+                                    <p class="card-text">Quantity: @inv.Quantity</p>
+                                </div>
+                                <div class="card-footer">
+                                    @if (inv.Quantity < 5)
+                                    {
+                                        <span class="badge badge-danger" style="color:red">Low Quantity</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-danger" style="color:darkblue">Enough Quantity</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ... -->
+@code {
+
+    [Parameter]
+    public string SearchTerm { get; set; } = string.Empty;
+
+    private List<Inventory> _inventories = new List<Inventory>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _inventories = (await ViewInventoriesByNameUseCase.ExecuteAsync(this.SearchTerm)).ToList();
+
+    }
+
+}
+
+
+

@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+obj
+bin
+.vs
+/IMS.WebApp/Properties/PublishProfiles
+/IMS.WebApp/Properties/ServiceDependencies/IMSWebAppication - Web Deploy
+/IMS.WebApp/Properties/serviceDependencies.IMSWebAppication - Web Deploy.json
+/IMS.WebApp/Properties/serviceDependencies.IMSWebAppication - Web Deploy.json.user
+/IMS.WebApp/Properties/serviceDependencies.json

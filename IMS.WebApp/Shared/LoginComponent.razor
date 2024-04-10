@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<AuthorizeView>
+    <Authorized>
+        <ul class="navbar-nav mb-2 mb-lg-0 float-end">
+            <li class="nav-item">
+                <a class="nav-link active" href="/identity/account/login"> @HttpContextAccessor.HttpContext.Session.GetString("UserName") | Sign Out</a>
+            </li>
+        </ul>        
+    </Authorized>
+    <NotAuthorized>
+        <ul class="navbar-nav mb-2 mb-lg-0 float-end">
+            <li class="nav-item">                
+                <a class="nav-link active" href="/identity/account/login">Sign In</a>
+            </li>
+        </ul>                
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+
+}
